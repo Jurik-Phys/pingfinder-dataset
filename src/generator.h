@@ -30,9 +30,9 @@ class Generator : public QObject {
         QVector<Client> m_clients;
 
         const int m_firstDay = 1;
-        const int m_lastDay  = 28;
-        const int m_minClientsPerDay = 3;
-        const int m_maxClientsPerDay = 11;
+        const int m_lastDay  = 31;
+        const int m_minClientsPerDay = 4;
+        const int m_maxClientsPerDay = 13;
         const QString m_jsonFullFileName = "/tmp/clients.json";
 
         QString getRndSex();

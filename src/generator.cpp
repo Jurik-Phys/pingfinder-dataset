@@ -160,17 +160,21 @@ QString Generator::getRndLastName(const QString& sex){
 QString Generator::getRndPhoneNumber(){
     QString phoneNumber = "+7-9";
 
-    int aa = QRandomGenerator::global()->bounded(0, 100);
-    phoneNumber = phoneNumber + QString::number(aa) + "-";
+    int     aaNum = QRandomGenerator::global()->bounded(0, 100);
+    QString aaStr = QString("%1").arg(aaNum, 2, 10, QChar('0'));
+    phoneNumber = phoneNumber + aaStr + "-";
 
-    int bbb = QRandomGenerator::global()->bounded(0, 1000);
-    phoneNumber = phoneNumber + QString::number(bbb) + "-";
+    int     bbbNum = QRandomGenerator::global()->bounded(0, 1000);
+    QString bbbStr = QString("%1").arg(bbbNum, 3, 10, QChar('0'));
+    phoneNumber = phoneNumber + bbbStr + "-";
 
-    int cc = QRandomGenerator::global()->bounded(0, 100);
-    phoneNumber = phoneNumber + QString::number(cc) + "-";
+    int     ccNum = QRandomGenerator::global()->bounded(0, 100);
+    QString ccStr = QString("%1").arg(ccNum, 2, 10, QChar('0'));
+    phoneNumber = phoneNumber + ccStr + "-";
 
-    int dd = QRandomGenerator::global()->bounded(0, 100);
-    phoneNumber = phoneNumber + QString::number(dd);
+    int     ddNum = QRandomGenerator::global()->bounded(0, 100);
+    QString ddStr = QString("%1").arg(ddNum, 2, 10, QChar('0'));
+    phoneNumber = phoneNumber + ddStr;
 
     return phoneNumber;
 }
@@ -199,7 +203,8 @@ void Generator::writeJson(const QVector<Client>& clients){
     QJsonObject root;
 
     QJsonObject aboutObj;
-    aboutObj["description"] = "Dataset для разработки pingfinder-smsd";
+    aboutObj["description"] = "Dataset для разработки и тестирования утилиты "
+                                                              "pingfinder-msgd";
 
     root["about"] = aboutObj;
     root["clients"] = clientsArray;
@@ -211,6 +216,8 @@ void Generator::writeJson(const QVector<Client>& clients){
         file.write(doc.toJson(QJsonDocument::Indented));
         file.close();
     }
+
+    qDebug() << "Generated dataset writed to" << m_jsonFullFileName;
 }
 
 // End generator.cpp

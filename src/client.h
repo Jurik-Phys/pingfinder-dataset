@@ -4,7 +4,6 @@
 #define CLIENT_H
 
 #include <QString>
-#include <QStringList>
 
 struct Client {
     int id;
@@ -13,6 +12,7 @@ struct Client {
     QString middleName;
     QString lastName;
     QString phoneNumber;
+    QString status;
     int reminderDay;
     int payAmount;
     bool enabled;
