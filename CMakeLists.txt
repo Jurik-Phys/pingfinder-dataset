@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.20)
 #         ${APP_GIT_DIRTY}         #
 # ******************************** #
 
-project(pingfinder-dataset VERSION 0.0.1)
+project(pingfinder-dataset VERSION 0.0.2)
 
 add_compile_definitions(
     APP_VERSION="${PROJECT_VERSION}"
