@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.20)
 #         ${APP_GIT_DIRTY}         #
 # ******************************** #
 
-project(pingfinder-dataset VERSION 0.1.2)
+project(pingfinder-dataset VERSION 0.0.2)
 
 add_compile_definitions(
     APP_VERSION="${PROJECT_VERSION}"
@@ -61,3 +61,8 @@ add_subdirectory(src)
 add_executable(pingfinder-dataset ${SOURCE_EXE})
 
 target_link_libraries(pingfinder-dataset PRIVATE Qt6::Core src-lib)
+
+install(TARGETS pingfinder-dataset
+    RUNTIME DESTINATION bin
+)
+

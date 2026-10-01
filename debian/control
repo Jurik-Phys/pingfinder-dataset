@@ -1,0 +1,18 @@
+Source: pingfinder-dataset
+Section: misc
+Priority: optional
+Maintainer: Yury Ovsyannikov <jurik.phys@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               cmake,
+               qt6-base-dev
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: pingfinder-push
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: PingFinder message daemon dataset generator
+  Command-line utility  utility that creates input data
+  for the pingfinder-msgd service. The generated dataset
+  is used for development and testing.
