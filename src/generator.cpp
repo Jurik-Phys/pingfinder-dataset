@@ -27,6 +27,10 @@ QVector<Client> Generator::generateClientDataset(const int& firstDay,
                                                  const int& minClientsPerDay,
                                                  const int& maxClientsPerDay){
 
+    // Очистка и получение нового  рандомизированного списка уникальных ников
+    m_uniqueRandNicknames.clear();
+    m_uniqueRandNicknames = getUniqueListOfRandNicknames();
+
     QVector<Client> res;
     int clientId = 0;
 
@@ -54,12 +58,32 @@ QVector<Client> Generator::generateClientDataset(const int& firstDay,
     return res;
 }
 
+QStringList Generator::getUniqueListOfRandNicknames(){
+    QStringList res;
+
+    QSet<QString> uniqueListOfNicknames(Dictionary::nicknames.begin(),
+                                        Dictionary::nicknames.end());
+
+    // QSet -> QStringList
+    res = uniqueListOfNicknames.values();
+
+    // Перемешивание списка по алгоритму Фишера — Йетса, сложность которого O(N)
+    // Элемент из 'хвостовой' позиции 'i' меняется местами с со случайным
+    // элементом с позиции 'j', которая случайна, но верхняя граница меньше 'i'
+    for (int i = res.size() - 1; i > 0; --i){
+        int j = QRandomGenerator::global()->bounded(i+1);
+        res.swapItemsAt(i,j);
+    }
+
+    return res;
+}
+
 Client Generator::generateSingleClient(const int& id, const int& day){
     Client newClient ;
 
     QString sex = getRndSex();
     newClient.id = id;
-    newClient.nickname    = getRndNickname();
+    newClient.nickname    = getRndNickname(id);
     newClient.firstName   = getRndFirstName(sex);
     newClient.middleName  = getRndMiddleName(sex);
     newClient.lastName    = getRndLastName(sex);
@@ -79,12 +103,27 @@ int Generator::getDayClients(const int& minClientsPerDay,
     return res;
 }
 
-QString Generator::getRndNickname(){
-    int lo = 0;
-    int hi = Dictionary::nicknames.size();
-    int nickIndex = QRandomGenerator::global()->bounded(lo,hi);
+QString Generator::getRndNickname(const int& id){
 
-    return Dictionary::nicknames.at(nickIndex);
+    QString nick;
+
+    // Позицию из рандомизированного списка уникальных ников будем ставить
+    // в соответствие с id пользователя за вычетом единицы
+    if (m_uniqueRandNicknames.size() >= id){
+        // Длинны уникального списка хватает для закрытия потребности в нике
+        // генерируемого клиента с текущим id
+        nick = m_uniqueRandNicknames[id - 1];
+    }
+    else {
+        qDebug() << "[II] Postfix branch";
+        int k = id / m_uniqueRandNicknames.size();
+        qDebug() << "[II] k" << k;
+        int idx = (id - 1) % m_uniqueRandNicknames.size();
+        qDebug() << "[II] idx" << idx;
+        nick = m_uniqueRandNicknames[idx] + "_" + QString::number(id);
+    }
+
+    return nick;
 }
 
 QString Generator::getRndSex(){

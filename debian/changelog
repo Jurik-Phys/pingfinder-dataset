@@ -1,10 +1,6 @@
-pingfinder-dataset (0.0.2-1) unstable; urgency=medium
+pingfinder-dataset (0.0.3-1) unstable; urgency=medium
 
-  * Add pingfinder-dataset generator /tmp/clients.json
-  * Fix phone number generator and other small bugs
-  * Add README.md file
-  * Add build instructions
-  * Add Debian package build system
-  * Add GitHub Actions build and release workflows
+  * Fix generated nicknames to prevent duplicates
+  * Fix app version without Git tree
 
- -- Yury Ovsyannikov <jurik.phys@gmail.com>  Thu, 01 Oct 2026 23:15:54 +0300
+ -- Yury Ovsyannikov <jurik.phys@gmail.com>  Mon, 12 Oct 2026 22:30:38 +0300
