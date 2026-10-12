@@ -1,6 +1,5 @@
-pingfinder-dataset (0.0.3-1) unstable; urgency=medium
+pingfinder-dataset (0.0.4-1) unstable; urgency=medium
 
-  * Fix generated nicknames to prevent duplicates
-  * Fix app version without Git tree
+  * Fix some bild package problem
 
- -- Yury Ovsyannikov <jurik.phys@gmail.com>  Mon, 12 Oct 2026 22:30:38 +0300
+ -- Yury Ovsyannikov <jurik.phys@gmail.com>  Mon, 12 Oct 2026 23:03:09 +0300
